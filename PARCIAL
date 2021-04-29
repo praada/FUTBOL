@@ -1,0 +1,57 @@
+import sqlite3
+import os
+
+APP_PATH = os.getcwd()
+DB_PATH = APP_PATH+'/my_database.db'
+
+con = sqlite3.connect(DB_PATH)
+cursor = con.cursor()
+
+try:
+    cursor.execute("""
+    CREATE TABLE FUTBOL(
+    ID          INT PRIMARE KEY NOT NULL,
+    PAIS        TEXT            NOT NULL,
+    JUGADOR     TEXT            NOT NULL
+    )
+    
+    """)
+
+except Exception as e:
+    print = e
+
+try:
+    cursor.execute("""
+        INSERT INTO FUTBOL(ID, PAIS, JUGADOR) VALUES (1,'CHILE','ALEXIS SANCHEZ')
+        """)
+    cursor.execute("""
+        INSERT INTO FUTBOL(ID, PAIS, JUGADOR) VALUES (2,'PANAMA','BLAS PEREZ')
+        """)
+    cursor.execute("""
+        INSERT INTO FUTBOL(ID, PAIS, JUGADOR) VALUES (3,'JAPON','KESUKE HONDA')
+        """)
+    cursor.execute("""
+        INSERT INTO FUTBOL(ID, PAIS, JUGADOR) VALUES (4,'ESPAÑA','FERNANDO TORRES')
+        """)
+    cursor.execute("""
+        INSERT INTO FUTBOL(ID, PAIS, JUGADOR) VALUES (5,'FRANCIA','KYLIE MBAPPE')
+        """)
+    cursor.execute("""
+        INSERT INTO FUTBOL(ID, PAIS, JUGADOR) VALUES (6,'INGLATERRA','MASON MOUNT')
+        """)
+    
+except Exception as e:
+    print = e
+
+cursor.execute("""
+    UPDATE FUTBOL SET JUGADOR='ANDRES INIESTA' WHERE ID=4
+""")
+
+cursor.execute("""
+    DELETE FROM FUTBOL WHERE ID=5
+""")
+
+con.commit()
+
+
+con.close()
